@@ -1,0 +1,1 @@
+"""Shiguang Extract application package."""

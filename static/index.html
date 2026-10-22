@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f8fa">
+  <meta name="description" content="拾光 Extract：提取你有权保存的公开作品视频、照片和实况素材，手机也能轻松使用。">
+  <title>拾光 Extract — 好内容，值得好好收藏</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" class="svg-library" aria-hidden="true">
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2.5l1.9 6.7 6.6 2-6.6 1.8L12 20l-1.9-7-6.6-1.8 6.6-2L12 2.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" fill="none"/><path d="M19 17l.75 2.2L22 20l-2.25.8L19 23l-.75-2.2L16 20l2.25-.8L19 17z" fill="currentColor"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13.5a5 5 0 0 0 7.3.3l2.3-2.3a5 5 0 0 0-7.1-7.1l-1.3 1.3M14 10.5a5 5 0 0 0-7.3-.3l-2.3 2.3a5 5 0 0 0 7.1 7.1l1.3-1.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13.5 2 5 13h6.4L10.5 22 19 11h-6.5L13.5 2z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3.5" y="4" width="17" height="16" rx="3" stroke="currentColor" stroke-width="1.7" fill="none"/><circle cx="9" cy="9" r="1.8" fill="currentColor"/><path d="m5 18 5.2-5.4 3.1 3 2.3-2.2 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="3" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="m10 9 5.5 3-5.5 3V9z" fill="currentColor"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M4 17v2.2A1.8 1.8 0 0 0 5.8 21h12.4a1.8 1.8 0 0 0 1.8-1.8V17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" stroke="currentColor" stroke-width="1.8" fill="none"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5L20 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 2 8 3v6c0 5-3.3 8.2-8 11-4.7-2.8-8-6-8-11V5l8-3z" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="m8 12 2.5 2.5L16 9" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4m-4 4 4-4 4 4M4 16v2.2A1.8 1.8 0 0 0 5.8 20h12.4a1.8 1.8 0 0 0 1.8-1.8V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6 18 18M18 6 6 18" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" fill="none"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 2.5h8l4 4v15H6a2 2 0 0 1-2-2v-15a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M14 3v4h4M8 13h8M8 17h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5M6 10a7 7 0 0 1 12.4-2L20 12M4 12l1.6 4a7 7 0 0 0 12.4-2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+  </svg>
+
+  <div class="page-shell">
+    <header class="site-header container">
+      <a class="brand" href="/" aria-label="拾光 Extract 首页">
+        <span class="brand-icon"><svg><use href="#i-spark"/></svg></span>
+        <span>拾光 <span class="brand-english">Extract</span></span>
+      </a>
+      <nav class="nav-links" aria-label="主导航">
+        <a href="#workspace">开始使用</a><a href="#platforms">支持平台</a><a href="#guide">使用说明</a>
+      </nav>
+      <a href="#workspace" class="nav-button">打开工作台 <svg><use href="#i-arrow"/></svg></a>
+    </header>
+
+    <main>
+      <section class="hero container">
+        <div class="hero-content">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR CREATIVE MEDIA TOOLKIT <span class="eyebrow-line"></span> 01 / 03</div>
+          <h1>好内容，<br><span class="gradient-text">值得好好收藏。</span></h1>
+          <p class="hero-description">一个清爽、免费的媒体整理工作台。粘贴公开作品链接，保存可以获取的视频、高清照片和 Live Photo 原始素材。</p>
+          <div class="hero-pills"><span><svg><use href="#i-check"/></svg> 免费使用</span><span><svg><use href="#i-check"/></svg> 无需注册</span><span><svg><use href="#i-check"/></svg> 适配手机</span></div>
+          <a class="hero-jump" href="#workspace">开始提取 <span><svg><use href="#i-arrow"/></svg></span></a>
+          <div class="hero-stats"><div><strong>03</strong><span>核心媒体类型</span></div><i></i><div><strong>01</strong><span>个链接即可开始</span></div><i></i><div><strong>0 ¥</strong><span>软件使用费用</span></div></div>
+        </div>
+        <div class="hero-visual" aria-label="视频、图片、实况照片卡片演示">
+          <div class="visual-glow"></div>
+          <div class="visual-card visual-card-back">
+            <span class="visual-label">MOTION / LIVE</span>
+            <div class="visual-mountain"><span class="moon"></span><span class="hill hill-a"></span><span class="hill hill-b"></span><span class="hill hill-c"></span></div>
+            <span class="visual-bottom">每一帧，都值得留下。 <svg><use href="#i-video"/></svg></span>
+          </div>
+          <div class="visual-card visual-card-front">
+            <div class="visual-photo"><div class="sphere"><div class="sphere-shine"></div></div><span class="floating-spark">✳</span></div>
+            <div class="visual-card-caption"><div><span>COLLECT / CREATE / KEEP</span><strong>灵感不再转瞬即逝。</strong></div><span class="photo-dot"><svg><use href="#i-image"/></svg></span></div>
+          </div>
+          <div class="visual-floating"><span class="floating-check"><svg><use href="#i-check"/></svg></span><div><b>已准备就绪</b><small>快速 · 清晰 · 简单</small></div></div>
+        </div>
+      </section>
+
+      <section class="workspace-section" id="workspace">
+        <div class="container">
+          <div class="section-intro"><div><span class="section-kicker">WORKSPACE · 工作台</span><h2>轻松提取，<span>一步到位。</span></h2><p>支持公开作品链接；部分平台可能要求登录或拒绝服务器访问。</p></div><div class="intro-star"><svg><use href="#i-spark"/></svg></div></div>
+          <div class="work-grid">
+            <div class="workspace-card">
+              <div class="tabbar" role="tablist" aria-label="提取方式">
+                <button class="tab active" id="tab-link" role="tab" aria-selected="true" aria-controls="pane-link" type="button"><svg><use href="#i-link"/></svg> 链接提取</button>
+                <button class="tab" id="tab-live" role="tab" aria-selected="false" aria-controls="pane-live" type="button"><svg><use href="#i-image"/></svg> Live Photo 配对</button>
+              </div>
+              <div class="tab-pane" id="pane-link" role="tabpanel" aria-labelledby="tab-link">
+                <form id="link-form" autocomplete="off">
+                  <div class="form-label-row"><label for="share-link">作品分享链接</label><span><span class="tiny-dot"></span> PUBLIC MEDIA ONLY</span></div>
+                  <div class="input-wrap"><textarea id="share-link" name="url" rows="3" placeholder="粘贴抖音 / 小红书 / TikTok / Instagram 等作品分享链接…" required maxlength="4000"></textarea><button id="paste-btn" class="paste-button" type="button"><svg><use href="#i-copy"/></svg> 粘贴</button></div>
+                  <div class="form-note"><svg><use href="#i-shield"/></svg> 仅适用于你有权下载、保存的公开内容；不支持私密、付费、DRM 作品。</div>
+                  <div class="format-heading"><span>想提取什么？</span><small>可自由切换</small></div>
+                  <div class="format-picker" role="radiogroup" aria-label="媒体类型">
+                    <label class="format-choice active"><input type="radio" name="media-mode" value="auto" checked><svg><use href="#i-spark"/></svg><span>智能识别</span></label>
+                    <label class="format-choice"><input type="radio" name="media-mode" value="video"><svg><use href="#i-video"/></svg><span>视频</span></label>
+                    <label class="format-choice"><input type="radio" name="media-mode" value="photos"><svg><use href="#i-image"/></svg><span>照片</span></label>
+                    <label class="format-choice"><input type="radio" name="media-mode" value="live"><svg><use href="#i-bolt"/></svg><span>实况素材</span></label>
+                  </div>
+                  <div class="button-pair"><button type="button" class="secondary-button" id="inspect-btn"><svg><use href="#i-image"/></svg> 识别预览</button><button type="submit" class="primary-button" id="download-btn">开始提取 <svg><use href="#i-arrow"/></svg></button></div>
+                </form>
+              </div>
+              <div class="tab-pane hidden" id="pane-live" role="tabpanel" aria-labelledby="tab-live">
+                <div class="live-intro"><span class="mini-icon"><svg><use href="#i-bolt"/></svg></span><div><h3>保留原始实况素材</h3><p>选择 iPhone 导出的 HEIC / JPG 照片与对应 MOV 视频，原样打包成 ZIP。</p></div></div>
+                <form id="live-form">
+                  <label class="drop-zone" for="local-files" id="drop-zone"><span class="drop-icon"><svg><use href="#i-upload"/></svg></span><strong>选择照片和动态视频</strong><span>或拖动文件到这里</span><small>支持 HEIC、JPG、PNG、MOV、MP4 等格式</small><input id="local-files" type="file" multiple accept=".heic,.heif,.jpg,.jpeg,.png,.webp,.gif,.avif,.mov,.mp4,.m4v,.webm,image/*,video/quicktime,video/mp4"></label>
+                  <div id="selected-files" class="selected-files" hidden></div>
+                  <div class="form-note"><svg><use href="#i-shield"/></svg> 文件仅用于本次临时打包，约 35 分钟后清理。ZIP 不会自动重建苹果相册的 Live Photo 关联。</div>
+                  <button type="submit" class="primary-button full-width" id="pair-btn">打包 Live Photo 原始素材 <svg><use href="#i-arrow"/></svg></button>
+                </form>
+              </div>
+              <div class="workspace-footer"><span><svg><use href="#i-shield"/></svg> 保护隐私 · 无平台账户登录</span><span>MAX 160 MB / JOB</span></div>
+            </div>
+            <aside class="result-card" aria-live="polite">
+              <div class="result-head"><div><span class="result-kicker">EXTRACTION STATUS</span><h3>提取结果</h3></div><span id="result-status" class="status-tag">等待开始</span></div>
+              <div class="result-empty" id="result-empty"><div class="result-graphic"><div class="result-icon-back"><svg><use href="#i-video"/></svg></div><div class="result-icon-front"><svg><use href="#i-image"/></svg></div><div class="result-icon-spark">✳</div></div><strong>素材，即将出现在这里</strong><p>在左侧粘贴作品链接并开始提取，完成后可以预览、下载或打包保存。</p></div>
+              <div class="result-content hidden" id="result-content">
+                <div class="post-overview hidden" id="post-overview"><img id="post-thumbnail" alt="作品封面" class="post-thumbnail" hidden><div class="post-meta"><span id="post-platform" class="platform-tag"></span><h4 id="post-title">作品</h4><p id="post-author"></p></div></div>
+                <div class="progress-box hidden" id="progress-box"><div class="progress-icon"><span class="loader"></span></div><div><strong id="progress-heading">正在连接平台…</strong><p id="progress-message">请保持页面打开，完成后自动显示文件。</p></div><div class="indeterminate"><span></span></div></div>
+                <div class="asset-wrap hidden" id="asset-wrap"><div class="asset-header"><h4>已提取素材 <span id="asset-count">0</span></h4><small id="expire-tip">临时保存约 35 分钟</small></div><div id="asset-grid" class="asset-grid"></div><a href="#" class="zip-button" id="zip-button" hidden><svg><use href="#i-download"/></svg> 打包下载全部素材 <svg><use href="#i-arrow"/></svg></a><p class="asset-tip">iPhone 如打开了预览，可点击分享按钮选择“存储到文件”。</p></div>
+                <div class="error-box hidden" id="error-box"><span class="error-icon">!</span><strong>暂时无法提取</strong><p id="error-message"></p><button type="button" id="retry-btn">重新尝试 <svg><use href="#i-refresh"/></svg></button></div>
+              </div>
+              <div class="result-bottom"><svg><use href="#i-clock"/></svg> 临时文件自动过期，请及时保存。<span>01 — 03</span></div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="platforms-section container" id="platforms"><div class="section-kicker">SUPPORTED PLATFORMS · 平台</div><div class="platforms-heading"><h2>从常见平台，到你的素材库。</h2><p>支持程度取决于平台公开接口与作品权限，图文、Live 原件不保证每条链接都能提取。</p></div><div class="platform-tags"><span>抖音</span><span>小红书</span><span>TikTok</span><span>Instagram</span><span>Bilibili</span><span>微博</span><span>快手</span><span>YouTube</span><span>X / Twitter</span><span>Pinterest</span><span>Facebook</span><span>Vimeo</span><span>Threads</span></div></section>
+
+      <section class="guide-section" id="guide"><div class="container"><div class="section-kicker">HOW IT WORKS · 使用流程</div><h2>只需三步，收藏灵感。</h2><div class="step-grid"><div class="step-card"><span class="step-number">01</span><span class="step-icon"><svg><use href="#i-link"/></svg></span><h3>复制分享链接</h3><p>在对应平台找到公开作品，复制其分享链接。</p></div><div class="step-card"><span class="step-number">02</span><span class="step-icon"><svg><use href="#i-spark"/></svg></span><h3>选择媒体类型</h3><p>粘贴链接，选择视频、图片或实况素材，再开始提取。</p></div><div class="step-card"><span class="step-number">03</span><span class="step-icon"><svg><use href="#i-download"/></svg></span><h3>下载并保存</h3><p>在结果列表预览，逐个保存或使用 ZIP 打包。</p></div></div><div class="guide-disclaimer"><svg><use href="#i-shield"/></svg><div><strong>关于使用范围</strong><p>请仅下载你创作或被授权保存的作品。本站无法绕过登录权限、DRM 或平台访问限制；不保证支持所有网站。本站为独立工具，与以上平台均无关联。</p></div></div></div></section>
+    </main>
+    <footer class="site-footer container"><a class="brand footer-brand" href="/"><span class="brand-icon"><svg><use href="#i-spark"/></svg></span><span>拾光 <span class="brand-english">Extract</span></span></a><span>让每一份灵感，都有迹可循。</span><span>© <span id="year">2026</span> 拾光 Extract · Free & Open Source</span></footer>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

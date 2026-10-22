@@ -1,0 +1,22 @@
+拾光 Extract —— 免费公开网站部署（简易版）
+
+第一步：解压 ZIP 压缩包。
+第二步：登录 https://github.com/new，新建一个仓库 shiguang-extract。
+第三步：进入仓库 → Add file → Upload files → 将解压后全部文件和文件夹拖进去 → Commit changes。
+  注意：GitHub 仓库第一页必须能看到 Dockerfile、render.yaml、requirements.txt 三个文件。
+第四步：登录 https://dashboard.render.com/ ，选择 New → Web Service。
+第五步：连接 GitHub → 选择 shiguang-extract 仓库 → Language 选择 Docker → Instance Type 选择 Free。
+第六步：点击 Create Web Service，等待部署完成。
+第七步：Render 会分配一个 https://项目名.onrender.com 的公网网址。
+第八步：用 iPhone Safari 打开这个网址，粘贴公开作品链接测试。
+
+注意：
+1. 目前已做基础自动化测试，但无法保证每个平台上的每条链接可提取。
+2. 免费主机会休眠；长时间无人使用后首次打开可能等待约 1 分钟。
+3. 平台可能阻止 Render 的数据中心 IP，例如 403/429，属于平台限制。
+4. 不支持私密、DRM、会员/付费作品，勿用来保存未经许可的内容。
+5. 本地 Live Photo 配对是保留 HEIC/JPG + MOV 原文件并制作 ZIP，不是生成原生实况照片。
+6. 如果已绑付款方式，请查看 Render Billing 以免意外收费。
+7. 部署全程需要在你自己的 GitHub 和 Render 账号操作；压缩包本身不是已经上线的网址。
+
+完整说明请阅读 README.md。

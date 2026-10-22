@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: shiguang-extract
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: MAX_TOTAL_MB
+        value: "160"
+      - key: MAX_ITEM_MB
+        value: "90"
