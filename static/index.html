@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#f7f8fa">
   <meta name="description" content="拾光 Extract：提取你有权保存的公开作品视频、照片和实况素材，手机也能轻松使用。">
   <title>拾光 Extract — 好内容，值得好好收藏</title>
-  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/style.css?v=1.1.0">
 </head>
 <body>
   <svg xmlns="http://www.w3.org/2000/svg" class="svg-library" aria-hidden="true">
@@ -87,6 +87,12 @@
                   </div>
                   <div class="button-pair"><button type="button" class="secondary-button" id="inspect-btn"><svg><use href="#i-image"/></svg> 识别预览</button><button type="submit" class="primary-button" id="download-btn">开始提取 <svg><use href="#i-arrow"/></svg></button></div>
                 </form>
+                <details class="page-import" id="page-import">
+                  <summary>小红书提示登录？导入已保存的作品网页</summary>
+                  <p>在自己的电脑浏览器正常登录小红书，打开你有权保存的具体笔记，确认图片已显示。按 Ctrl+S（Mac：⌘S）保存为 HTML 网页，然后选择该文件。手机浏览器不方便保存网页时，请使用电脑完成。</p>
+                  <p>只支持包含笔记数据的 .html / .htm，最大 5 MB；不支持截图、快捷方式或登录页。网页文件会发送到本站临时解析，不保存网页、不执行脚本，也无需提供密码或 Cookie。请仅导入该作品网页。</p>
+                  <form id="page-form"><label for="saved-page">选择作品 HTML 网页</label><input id="saved-page" type="file" accept=".html,.htm,text/html" required><button id="import-btn" type="submit" class="secondary-button full-width">读取网页中的图片</button></form>
+                </details>
               </div>
               <div class="tab-pane hidden" id="pane-live" role="tabpanel" aria-labelledby="tab-live">
                 <div class="live-intro"><span class="mini-icon"><svg><use href="#i-bolt"/></svg></span><div><h3>保留原始实况素材</h3><p>选择 iPhone 导出的 HEIC / JPG 照片与对应 MOV 视频，原样打包成 ZIP。</p></div></div>
@@ -121,6 +127,6 @@
     <footer class="site-footer container"><a class="brand footer-brand" href="/"><span class="brand-icon"><svg><use href="#i-spark"/></svg></span><span>拾光 <span class="brand-english">Extract</span></span></a><span>让每一份灵感，都有迹可循。</span><span>© <span id="year">2026</span> 拾光 Extract · Free & Open Source</span></footer>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="/static/app.js" defer></script>
+  <script src="/static/app.js?v=1.1.0" defer></script>
 </body>
 </html>

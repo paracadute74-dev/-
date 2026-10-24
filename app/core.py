@@ -231,6 +231,17 @@ def _gallery_download(url: str, workdir: Path):
 
 def inspect_link(url: str, platform: str) -> dict:
     """Best-effort metadata; failure is not a blocker to trying an actual download."""
+    if platform == '小红书':
+        from .xiaohongshu import fetch_note
+        try:
+            note = fetch_note(url)
+            return {**{k: note[k] for k in ('title', 'author')},
+                    'thumbnail': note['images'][0], 'count': len(note['images']),
+                    'platform': platform, 'duration': None, 'preview_available': True}
+        except MediaProblem as exc:
+            return {'title': '已识别小红书链接', 'author': '', 'thumbnail': '',
+                    'count': None, 'platform': platform, 'duration': None,
+                    'preview_available': False, 'message': str(exc)}
     workdir = ROOT_DIR / ("inspect-" + uuid.uuid4().hex)
     workdir.mkdir(parents=True, exist_ok=False)
     try:
@@ -309,10 +320,10 @@ class JobStore:
         with self.lock:
             return self.jobs.get(id)
 
-    def schedule(self, job: Job, url: str):
-        threading.Thread(target=self.process, args=(job, url), daemon=True).start()
+    def schedule(self, job: Job, url: str, note: dict | None = None):
+        threading.Thread(target=self.process, args=(job, url, note), daemon=True).start()
 
-    def process(self, job: Job, url: str):
+    def process(self, job: Job, url: str, note: dict | None = None):
         with self.semaphore:
             job.status = "working"
             job.message = "正在连接平台并获取媒体…"
@@ -322,6 +333,11 @@ class JobStore:
                 strategies = [_gallery_download, _youtube_download]
             else:
                 strategies = [_youtube_download, _gallery_download]
+            if job.platform == '小红书' and job.mode != 'video':
+                from .xiaohongshu import download_note, download_images
+                strategies.insert(0, download_note)
+                if note is not None:
+                    strategies = [lambda _url, folder: download_images(note, folder)]
             errors: list[str] = []
             selected: list[Path] = []
             for downloader in strategies:
@@ -340,11 +356,12 @@ class JobStore:
                     if selected:
                         break
                     errors.append("当前工具未识别到所选类型的媒体文件。")
-                except MediaProblem as e:
+                except (MediaProblem, OSError) as e:
                     errors.append(str(e))
             if not selected:
                 job.status = "error"
-                job.message = errors[-1] if errors else "没有检测到可下载文件。"
+                job.message = (errors[0] if job.platform == '小红书' and job.mode != 'video'
+                               else errors[-1]) if errors else "没有检测到可下载文件。"
                 return
             if file_size_total(dl_dir) > MAX_TOTAL_BYTES:
                 job.status = "error"

@@ -40,7 +40,7 @@
   function setStatus(label, kind) {ui.status.textContent = label;ui.status.className = `status-tag ${kind || ""}`;}
   function setBusy(value) {
     busy = value;
-    [ui.inspect, ui.download, ui.pair].forEach(button => button.disabled = value);
+    [ui.inspect, ui.download, ui.pair, $("import-btn")].forEach(button => button.disabled = value);
     ui.download.textContent = value ? "正在处理…" : "开始提取";
     if (!value) ui.download.appendChild(svg("i-arrow"));
     ui.pair.textContent = value ? "正在打包…" : "打包 Live Photo 原始素材";
@@ -58,6 +58,7 @@
   function showError(message) {
     clearResult();show(ui.errorBox);setStatus("提取失败", "error");
     ui.errorMessage.textContent = message;
+    if (/小红书|网页导入|保存.*网页/.test(message)) $("page-import").open = true;
     setBusy(false);
     if (activeTimer){clearTimeout(activeTimer);activeTimer=null;}
   }
@@ -93,7 +94,10 @@
     try {
       const data = await postJson("/api/inspect",{url});
       clearResult();showOverview(data);setStatus("已识别", "ready");
-      if (!data.preview_available) notify("封面暂时不可用，可以直接点击「开始提取」尝试。 ");
+      if (!data.preview_available) {
+        ui.author.textContent = data.message || "封面暂时不可用，可以直接尝试提取。";
+        if (data.platform === "小红书") $("page-import").open = true;
+      }
     } catch(err){showError(err.message || "识别失败，请检查链接。 ");}
     finally {setBusy(false);}
   }
@@ -132,7 +136,7 @@
   }
   async function pollJob(jobId, round=0) {
     if(jobId !== currentJob)return;
-    if(round > 62){showError("任务等待时间过长，请稍后重新尝试。 ");return;}
+    if(round > 150){showError("任务等待时间过长，请稍后重新尝试。 ");return;}
     try{
       const response=await fetch(`/api/jobs/${encodeURIComponent(jobId)}`,{cache:"no-store"});
       const data=await response.json().catch(()=>({}));
@@ -195,9 +199,25 @@
   ui.liveForm.addEventListener("submit",beginLive);
   ui.inspect.addEventListener("click",inspectLink);
   ui.retry.addEventListener("click",()=>{
-    if(lastAction==="live")beginLive(new Event("submit"));
+    if(lastAction==="page")beginPageImport(new Event("submit"));
+    else if(lastAction==="live")beginLive(new Event("submit"));
     else beginExtract(new Event("submit"));
   });
+  async function beginPageImport(event) {
+    event.preventDefault();if(busy)return;
+    const file = $("saved-page").files[0];
+    if(!file || !/\.html?$/i.test(file.name)){notify("请选择作品的 HTML 网页文件。");return;}
+    if(file.size>5*1024*1024){notify("网页文件最大支持 5 MB。");return;}
+    lastAction="page";setBusy(true);showProgress("正在读取作品网页…","读取图片信息后下载素材，网页文件不会保存。");
+    try {
+      const body=new FormData();body.append("file",file);
+      const response=await fetch("/api/import-page",{method:"POST",body});
+      const info=await response.json();
+      if(!response.ok)throw new Error(info.error||"读取网页失败。");
+      currentJob=info.id;showOverview(info);pollJob(info.id);
+    } catch(error){showError(error.message||"网页导入失败。");}
+  }
+  $("page-form").addEventListener("submit",beginPageImport);
   ui.paste.addEventListener("click",async()=>{
     try{ui.url.value=await navigator.clipboard.readText();ui.url.focus();notify("链接已粘贴");}
     catch(_){ui.url.focus();notify("浏览器不允许读取剪贴板，请长按输入框手动粘贴。 ");}

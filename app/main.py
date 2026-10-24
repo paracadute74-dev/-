@@ -19,7 +19,7 @@ from .core import (
 )
 
 BASE = Path(__file__).resolve().parent.parent
-app = FastAPI(title="拾光 Extract", version="1.0.0", docs_url=None, redoc_url=None)
+app = FastAPI(title="拾光 Extract", version="1.1.0", docs_url=None, redoc_url=None)
 app.mount("/static", StaticFiles(directory=BASE / "static"), name="static")
 
 
@@ -87,7 +87,7 @@ def index():
 
 @app.get("/api/health")
 def health():
-    return {"status": "ok", "service": "shiguang-extract"}
+    return {"status": "ok", "service": "shiguang-extract", "version": "1.1.0"}
 
 
 @app.post("/api/inspect")
@@ -130,6 +130,28 @@ def describe_job(job: Job):
             "download_url": f"/api/jobs/{job.id}/files/{n}",
         } for n, p in enumerate(job.files) if p.exists()],
     }
+
+
+@app.post('/api/import-page', status_code=202)
+async def import_page(request: Request, file: UploadFile = File(...)):
+    from .xiaohongshu import MAX_PAGE_BYTES, parse_note
+    rate_limit(request, max_per_hour=15)
+    try:
+        if Path(file.filename or '').suffix.lower() not in {'.html', '.htm'}:
+            raise HTTPException(400, '请选择已保存的小红书作品 HTML 网页。')
+        raw = await file.read(MAX_PAGE_BYTES + 1)
+        if len(raw) > MAX_PAGE_BYTES:
+            raise HTTPException(413, '网页文件不能超过 5 MB。')
+        # Raw HTML is parsed locally, never served or retained in the task directory.
+        note = await run_in_threadpool(parse_note, raw.decode('utf-8-sig', 'replace'))
+        job = store.create(mode='photos', platform='小红书')
+        store.schedule(job, '', note)
+        return {'id': job.id, 'status': job.status, 'platform': job.platform,
+                'title': note['title'], 'author': note['author']}
+    except MediaProblem as exc:
+        raise HTTPException(400, str(exc)) from exc
+    finally:
+        await file.close()
 
 
 @app.get("/api/jobs/{job_id}")
